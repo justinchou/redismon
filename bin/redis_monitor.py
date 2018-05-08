@@ -110,9 +110,10 @@ def main():
 	redis_items = y["items"]
 	for redis_ins in redis_items:
 		redis_clusterName = redis_ins["cluster_name"]
+		redis_addr = redis_ins["addr"] or redis_hostname
 		redis_port = redis_ins["port"]
 		redis_password = redis_ins["password"]
-		redis_falcon_monitor = RedisFalconMonitor(redis_hostname, redis_port,redis_password,redis_clusterName)
+		redis_falcon_monitor = RedisFalconMonitor(redis_addr, redis_port,redis_password,redis_clusterName)
 		redis_is_alive = redis_falcon_monitor.ping_redis()
 		if(redis_is_alive == 0):
 			continue
